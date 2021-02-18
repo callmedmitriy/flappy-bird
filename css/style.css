@@ -1,0 +1,36 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+#field {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.player {
+    position: absolute;
+    border-radius: 50%;
+    background-color: red;
+}
+
+.tube {
+    position: absolute;
+    background-color: black;
+}
+
+.score {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    width: 100px;
+    height: 50px;
+
+    border: 1px solid #000;
+    background-color: #fff;
+    text-align: center;
+    line-height: 50px;
+
+}
