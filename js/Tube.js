@@ -10,10 +10,6 @@ class Tube {
         }
     }
 
-    intersection({ x, y }) {
-        console.log('check intersection');
-    }
-
     get placement() {
         return {
             height: this.height,

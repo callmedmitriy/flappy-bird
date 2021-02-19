@@ -3,12 +3,10 @@ import { GAME_FIELD } from './consts';
 class Render {
     constructor() {
         this.playerNode;
-        this.tubeTopNode;
-        this.tubeBottomNode;
         this.scoreNode;
     }
     
-    playerInit({x, y}, { size }) {
+    playerInit({x, y}, size) {
         if (this.playerNode) {
             this.playerNode.style.left = `${x}px`;
             this.playerNode.style.top = `${y}px`;
@@ -30,29 +28,36 @@ class Render {
         this.playerNode.style.top = `${y}px`;
     }
 
-    tubesInit() {
-        if (!(this.tubeTopNode && this.tubeBottomNode)) {
-            this.tubeTopNode = document.createElement("div");
-            this.tubeTopNode.className = "tube tube-top";
-            this.tubeBottomNode = document.createElement("div");
-            this.tubeBottomNode.className = "tube tube-bottom";
-        }
-        this.tubeTopNode.removeAttribute('style');
-        this.tubeBottomNode.removeAttribute('style');
-        GAME_FIELD.append(this.tubeTopNode, this.tubeBottomNode);
+    tubesInit(index, { tubeTop, tubeBottom }) {
+        let tubeTopNode = document.createElement("div");
+        tubeTopNode.className = `tube tube-top tube-${index}`;
+        let tubeBottomNode = document.createElement("div");
+        tubeBottomNode.className = `tube tube-bottom tube-${index}`;
+
+        tubeTopNode.style.top = `${tubeTop.top}px`
+        tubeTopNode.style.height = `${tubeTop.height}px`
+        
+        tubeBottomNode.style.top = `${tubeBottom.top}px`
+        tubeBottomNode.style.height = `${tubeBottom.height}px`
+
+        GAME_FIELD.append(tubeTopNode, tubeBottomNode);
     }
 
-    tubesMove({ tubeTop, tubeBottom, position, width }) {
-        this.tubeTopNode.style.top = `${tubeTop.top}px`
-        this.tubeTopNode.style.height = `${tubeTop.height}px`
+    tubesMove(index, { position, width }) {
+        let tubeTopNode = document.querySelector(`.tube.tube-top.tube-${index}`); 
+        let tubeBottomNode = document.querySelector(`.tube.tube-bottom.tube-${index}`); 
         
-        this.tubeBottomNode.style.top = `${tubeBottom.top}px`
-        this.tubeBottomNode.style.height = `${tubeBottom.height}px`
-        
-        this.tubeTopNode.style.width = `${width}px`
-        this.tubeBottomNode.style.width = `${width}px`
-        this.tubeTopNode.style.left = `${position}px`
-        this.tubeBottomNode.style.left = `${position}px`
+        tubeTopNode.style.width = `${width}px`
+        tubeBottomNode.style.width = `${width}px`
+        tubeTopNode.style.left = `${position}px`
+        tubeBottomNode.style.left = `${position}px`
+    }
+
+    tubesDestroy(index) {
+        let tubeTopNode = document.querySelector(`.tube.tube-top.tube-${index}`); 
+        let tubeBottomNode = document.querySelector(`.tube.tube-bottom.tube-${index}`); 
+        tubeTopNode.remove();
+        tubeBottomNode.remove();
     }
 
     score(points) {
