@@ -1,4 +1,4 @@
-import { CLIENT_HEIGHT } from './consts'; 
+import { CLIENT_HEIGHT } from './consts';
 
 class Tube {
     constructor(height, isTop) {
@@ -14,7 +14,7 @@ class Tube {
         return {
             height: this.height,
             top: this.top,
-        }
+        };
     }
 }
 
